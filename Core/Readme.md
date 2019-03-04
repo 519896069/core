@@ -3,7 +3,7 @@
 ###1.生成基础数据表
 ``` 
 php artisan migrate
-php artisan migrate --path=/Core/Databases/migrations 
+php artisan migrate --path=/vendor/fengzepei/core/Core/Databases/migrations
 ```
 
 ###2.安装passport
