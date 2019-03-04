@@ -28,7 +28,7 @@ class Core
     public static function routers()
     {
         Route::namespace(self::$base_namespace)
-            ->group(base_path('Core/Components/Routes/router.php'));
+            ->group('Core/Components/Routes/router.php');
     }
 
     /**
