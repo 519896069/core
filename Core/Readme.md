@@ -36,6 +36,23 @@ transaction : 事务中间件
         class Handler extends Core\Components\Base\Handler {
         ...
         
+###5.设置命令行  
+app/Console/Kernel.php下修改
+
+```
+   /**
+     * The Artisan commands provided by your application.
+     *
+     * @var array
+     */
+    protected $commands = [
+        //
+        ...
+        Core\Components\Commands\CreateAdminUser::class,
+        Core\Components\Commands\SocketServer::class,
+    ];
+```      
+        
 ####备注：
 
 composer拓展
