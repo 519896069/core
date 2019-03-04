@@ -1,10 +1,10 @@
 <?php
 
-namespace Core\Components\Commands;
+namespace src\Core\Compoents\Commands;
 
 
-use Core\Components\Base\Command;
-use Core\Components\Models\AdminUser;
+use src\Core\Compoents\Base\Command;
+use src\Core\Compoents\Models\AdminUser;
 
 class CreateAdminUser extends Command
 {

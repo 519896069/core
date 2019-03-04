@@ -6,10 +6,10 @@
  * Time: 10:23
  */
 
-namespace Core\Components\Models;
+namespace src\Core\Compoents\Models;
 
 
-use Core\Components\Controllers\Base\Model;
+use src\Core\Compoents\Controllers\Base\Model;
 
 class Connection extends Model
 {

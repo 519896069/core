@@ -6,11 +6,11 @@
  * Time: 14:15
  */
 
-namespace Core\Components\Workerman\Instance;
+namespace src\Core\Compoents\Workerman\Instance;
 
 
 use Workerman\Worker;
-use Core\Components\Workerman\Interfaces\Websocket;
+use src\Core\Compoents\Workerman\Interfaces\Websocket;
 
 class WM
 {

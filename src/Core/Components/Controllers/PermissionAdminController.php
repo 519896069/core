@@ -1,13 +1,13 @@
 <?php
 
-namespace Core\Components\Controllers;
+namespace src\Core\Compoents\Controllers;
 
 
-use Core\Components\Controllers\Base\AdminController;
-use Core\Components\Models\AdminUser;
-use Core\Components\Models\Permission;
-use Core\Components\Models\Role;
-use Core\Components\Resources\PermissionResource;
+use src\Core\Compoents\Controllers\Base\AdminController;
+use src\Core\Compoents\Models\AdminUser;
+use src\Core\Compoents\Models\Permission;
+use src\Core\Compoents\Models\Role;
+use src\Core\Compoents\Resources\PermissionResource;
 
 class PermissionAdminController extends AdminController
 {

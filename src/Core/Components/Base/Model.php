@@ -1,8 +1,8 @@
 <?php
 
-namespace Core\Components\Controllers\Base;
+namespace src\Core\Compoents\Controllers\Base;
 
-use Core\Components\Tools\StringTool;
+use src\Core\Compoents\Tools\StringTool;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
 class Model extends BaseModel

@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Components\Workerman\Interfaces;
+namespace src\Core\Compoents\Workerman\Interfaces;
 
 
 use Workerman\Worker;

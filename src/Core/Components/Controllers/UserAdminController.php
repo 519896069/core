@@ -1,11 +1,11 @@
 <?php
 
-namespace Core\Components\Controllers;
+namespace src\Core\Compoents\Controllers;
 
 
-use Core\Components\Controllers\Base\AdminController;
-use Core\Components\Models\AdminUser;
-use Core\Components\Resources\AdminUserResource;
+use src\Core\Compoents\Controllers\Base\AdminController;
+use src\Core\Compoents\Models\AdminUser;
+use src\Core\Compoents\Resources\AdminUserResource;
 use Illuminate\Support\Facades\Hash;
 
 class UserAdminController extends AdminController

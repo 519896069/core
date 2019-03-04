@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Components\Tools;
+namespace src\Core\Compoents\Tools;
 
 use Illuminate\Support\Str;
 

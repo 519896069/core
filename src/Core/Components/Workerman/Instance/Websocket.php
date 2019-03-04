@@ -6,15 +6,15 @@
  * Time: 14:04
  */
 
-namespace Core\Components\Workerman\Instance;
+namespace src\Core\Compoents\Workerman\Instance;
 
 
-use Core\Components\Models\Connection;
+use src\Core\Compoents\Models\Connection;
 use Core\Core;
 use Illuminate\Support\Facades\DB;
 use Workerman\Lib\Timer;
 use Workerman\Worker;
-use Core\Components\Workerman\Interfaces\Websocket as WebsocketInterface;
+use src\Core\Compoents\Workerman\Interfaces\Websocket as WebsocketInterface;
 
 class Websocket implements WebsocketInterface
 {

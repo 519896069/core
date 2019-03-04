@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Components\Middlewares;
+namespace src\Core\Compoents\Middlewares;
 
 
 use Closure;

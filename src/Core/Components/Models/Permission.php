@@ -1,8 +1,8 @@
 <?php
 
-namespace Core\Components\Models;
+namespace src\Core\Compoents\Models;
 
-use Core\Components\Filters\PermissionFilter;
+use src\Core\Compoents\Filters\PermissionFilter;
 use EloquentFilter\Filterable;
 use Spatie\Permission\Models\Permission as PermissionsPermission;
 

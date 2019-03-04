@@ -1,8 +1,8 @@
 <?php
 
-namespace Core\Components\Models;
+namespace src\Core\Compoents\Models;
 
-use Core\Components\Filters\RoleFilter;
+use src\Core\Compoents\Filters\RoleFilter;
 use EloquentFilter\Filterable;
 use Spatie\Permission\Models\Role as PermissionsRole;
 

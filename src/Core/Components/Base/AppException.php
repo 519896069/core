@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Components\Controllers\Base;
+namespace src\Core\Compoents\Controllers\Base;
 
 use Core\Core;
 use DB;

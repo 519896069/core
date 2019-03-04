@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Components\Base;
+namespace src\Core\Compoents\Base;
 
 use DB;
 use Illuminate\Console\Command as BaseCommand;

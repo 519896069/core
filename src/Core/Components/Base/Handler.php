@@ -1,8 +1,8 @@
 <?php
 
-namespace Core\Components\Base;
+namespace src\Core\Compoents\Base;
 
-use Core\Components\Controllers\Base\AppException;
+use src\Core\Compoents\Controllers\Base\AppException;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 

@@ -19,8 +19,8 @@ App\Http\Kernel.php中加入middleware加入代码
 
     protected $routeMiddleware = [
         ...
-        'authenticate'  => \Core\Components\Middlewares\Authenticate::class,
-        'transaction'   => \Core\Components\Middlewares\Transaction::class,
+        'authenticate'  => \src\Core\Compoents\Middlewares\Authenticate::class,
+        'transaction'   => \src\Core\Compoents\Middlewares\Transaction::class,
     ];
     
 描述：
@@ -33,7 +33,7 @@ transaction : 事务中间件
  修改为继承Exception
  
         ...
-        class Handler extends Core\Components\Base\Handler {
+        class Handler extends src\Core\Compoents\Base\Handler {
         ...
         
 ####备注：

@@ -2,15 +2,15 @@
 
 namespace Core;
 
-use Core\Components\Workerman\Instance\Websocket as WebsocketClient;
-use Core\Components\Workerman\Interfaces\Websocket;
+use src\Core\Compoents\Workerman\Instance\Websocket as WebsocketClient;
+use src\Core\Compoents\Workerman\Interfaces\Websocket;
 use Illuminate\Log\Logger;
 use Log;
 use Route;
 
 class Core
 {
-    protected static $base_namespace = 'Core\Components\Controllers';
+    protected static $base_namespace = 'src\Core\Compoents\Controllers';
 
     const ERROR   = "error";
     const ALTER   = "alter";

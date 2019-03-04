@@ -1,9 +1,9 @@
 <?php
 
-namespace Core\Components\Models;
+namespace src\Core\Compoents\Models;
 
-use Core\Components\Filters\AdminUserFilter;
-use Core\Components\Tools\StringTool;
+use src\Core\Compoents\Filters\AdminUserFilter;
+use src\Core\Compoents\Tools\StringTool;
 use EloquentFilter\Filterable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\Access\Authorizable;
