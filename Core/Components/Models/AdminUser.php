@@ -72,7 +72,6 @@ class AdminUser extends User implements
 
     public function createData($data, $administer = 0)
     {
-        $data['id']         = self::generate_uuid();
         $data['administer'] = $administer;
         $data['password']   = Hash::make($data['password']);
         return parent::create($data);
