@@ -30,7 +30,7 @@ class Core
         Route::namespace(self::$base_namespace)
             ->group(function () {
                 Route::middleware(['transaction'])->group(function () {
-                    Route::get('login', 'AuthAdminController@login')->name('login');
+                    Route::post('login', 'AuthAdminController@login')->name('login');
 
                     Route::middleware(['authenticate'])->group(function () {
                         Route::resource('user', 'UserAdminController')->only(['index', 'store', 'update', 'show']);
