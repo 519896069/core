@@ -26,7 +26,7 @@ class UserAdminController extends AdminController
 
     /**
      * 创建后台用户
-     * @throws \Illuminate\Validation\ValidationException
+     * @return AdminUserResource
      */
     public function store()
     {
@@ -42,7 +42,6 @@ class UserAdminController extends AdminController
      * 更新用户信息
      * @param $id
      * @return AdminUserResource
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function update($id)
     {

@@ -3,7 +3,7 @@
 namespace Core\Components\Controllers\Base;
 
 use Core\Core;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;

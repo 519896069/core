@@ -30,7 +30,7 @@ class RoleAdminController extends AdminController
 
     /**
      * 创建后台用户
-     * @throws \Illuminate\Validation\ValidationException
+     * @return RoleResource
      */
     public function store()
     {

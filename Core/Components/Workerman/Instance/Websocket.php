@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: fengzepei
- * Date: 2019/2/12
- * Time: 14:04
- */
 
 namespace Core\Components\Workerman\Instance;
 

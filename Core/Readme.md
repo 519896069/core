@@ -19,8 +19,8 @@ App\Http\Kernel.php中加入middleware加入代码
 
     protected $routeMiddleware = [
         ...
-        'authenticate'  => \Core\Components\Middlewares\Authenticate::class,
-        'transaction'   => \Core\Components\Middlewares\Transaction::class,
+        'authenticate'  => \Core\Components\Middleware\Authenticate::class,
+        'transaction'   => \Core\Components\Middleware\Transaction::class,
     ];
     
 描述：

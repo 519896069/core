@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: fengzepei
- * Date: 2019/2/14
- * Time: 10:23
- */
 
 namespace Core\Components\Models;
 

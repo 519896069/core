@@ -4,7 +4,6 @@ namespace Core\Components\Commands;
 
 
 use Core\Components\Base\Command;
-use Core\Components\Models\AdminUser;
 use Core\Components\Workerman\Instance\WM;
 
 class SocketServer extends Command

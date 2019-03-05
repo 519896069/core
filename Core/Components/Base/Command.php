@@ -2,7 +2,7 @@
 
 namespace Core\Components\Base;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Command as BaseCommand;
 
 abstract class Command extends BaseCommand
