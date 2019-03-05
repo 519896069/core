@@ -12,12 +12,14 @@ class Model extends BaseModel
     protected $casts = ['id' => 'string'];
 
     /**
-     * @param $data
-     * @return mixed
+     * 设定用户的名字。
+     *
+     * @param  string $value
+     * @return void
      */
-    public function createData($data)
+    public function setIdAttribute($value)
     {
-        $data['id']         = self::generate_uuid();
-        return parent::create($data);
+        $this->attributes['id'] = self::generate_uuid();
     }
+
 }

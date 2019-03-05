@@ -31,7 +31,7 @@ class CreateAdminUser extends Command
         $account  = $this->ask('请输入登录账号');
         $password = $this->secret('请输入密码');
         $this->info('账号创建中...');
-        $this->adminUser->createData([
+        $this->adminUser->create([
             'username'   => $username,
             'account'    => $account,
             'password'   => $password,

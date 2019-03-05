@@ -35,7 +35,7 @@ class UserAdminController extends AdminController
             'password' => 'required|min:5',
             'username' => 'required',
         ]);
-        return AdminUserResource::make($this->adminUser->createData(request(['account', 'password', 'username'])));
+        return AdminUserResource::make($this->adminUser->create(request(['account', 'password', 'username'])));
     }
 
     /**
