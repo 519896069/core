@@ -1,11 +1,10 @@
 <?php
 
-namespace Core\Components;
+namespace Core;
 
 
 use Core\Components\Commands\CreateAdminUser;
 use Core\Components\Commands\SocketServer;
-use Core\Core;
 use Illuminate\Support\ServiceProvider;
 use Core\Components\Workerman\Instance\Websocket as WebsocketClient;
 use Core\Components\Workerman\Interfaces\Websocket;
