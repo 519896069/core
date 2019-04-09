@@ -2,15 +2,12 @@
 
 namespace Core;
 
-use Core\Components\Workerman\Instance\Websocket as WebsocketClient;
-use Core\Components\Workerman\Interfaces\Websocket;
 use Illuminate\Log\Logger;
 use Log;
-use Route;
 
 class Core
 {
-    protected static $base_namespace = 'Core\Components\Controllers';
+    public static $base_namespace = 'Core\Components\Controllers';
 
     const ERROR   = "error";
     const ALTER   = "alter";
@@ -19,32 +16,6 @@ class Core
     const NOTICE  = "notice";
     const DEBUG   = "debug";
     const LOG     = "log";
-
-    public static function boot()
-    {
-        app()->bind(Websocket::class, WebsocketClient::class);
-    }
-
-    public static function routers()
-    {
-        Route::namespace(self::$base_namespace)
-            ->group(function () {
-                Route::middleware(['transaction'])->group(function () {
-                    Route::post('login', 'AuthAdminController@login')->name('login');
-
-                    Route::middleware(['authenticate'])->group(function () {
-                        Route::resource('user', 'UserAdminController')->only(['index', 'store', 'update', 'show']);
-                        Route::resource('role', 'RoleAdminController')->only(['index', 'store', 'update']);
-                        Route::resource('permission', 'PermissionAdminController')->only(['index', 'store', 'update']);
-
-                        Route::post('roleEmpowerment/{id}', 'PermissionAdminController@roleEmpowerment')->name('role.empowerment');
-                        Route::post('userEmpowerment/{id}', 'PermissionAdminController@userEmpowerment')->name('user.empowerment');
-                        Route::post('syncRoles/{id}', 'PermissionAdminController@syncRoles')->name('sync.roles');
-                        Route::post('logout', 'AuthAdminController@logout')->name('logout');
-                    });
-                });
-            });
-    }
 
     /**
      * error
