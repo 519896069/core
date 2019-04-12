@@ -18,8 +18,8 @@ class CoreServiceProvider extends ServiceProvider
         $this->routers();
 
         app()->bind(Websocket::class, WebsocketClient::class);
-        $this->loadMigrationsFrom(__DIR__ . '../Databases/migrations');
-        $this->mergeConfigFrom(__DIR__ . 'Components/Config/core.php', 'core');
+        $this->loadMigrationsFrom(__DIR__ . '/../Databases/migrations');
+        $this->mergeConfigFrom(__DIR__ . '/Components/Config/core.php', 'core');
 
         if ($this->app->runningInConsole()) {
 
