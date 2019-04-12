@@ -27,6 +27,14 @@
     "nunomaduro/collision": "^2.0",
     "phpunit/phpunit": "^7.0"
   },
+  "extra": {
+    "laravel": {
+      "dont-discover": [],
+      "providers": [
+        "Core\\CoreServiceProvider"
+      ]
+    }
+  },
   "autoload": {
     "psr-4": {
       "Core\\": "./Core"
