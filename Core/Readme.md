@@ -3,7 +3,6 @@
 ###1.生成基础数据表
 ``` 
 php artisan migrate
-php artisan migrate --path=/vendor/fengzepei/core/Core/Databases/migrations
 ```
 
 ###2.安装passport
@@ -11,9 +10,7 @@ php artisan migrate --path=/vendor/fengzepei/core/Core/Databases/migrations
 php artisan passport:install
 ```
 
-###3.设置路由
-App\Providers\RouteServiceProvider.php中加入代码
-```  Core::routers(); ```
+###3.设置中间件
 
 App\Http\Kernel.php中加入middleware加入代码
 
@@ -36,22 +33,6 @@ transaction : 事务中间件
         class Handler extends Core\Components\Base\Handler {
         ...
         
-###5.设置命令行  
-app/Console/Kernel.php下修改
-
-```
-   /**
-     * The Artisan commands provided by your application.
-     *
-     * @var array
-     */
-    protected $commands = [
-        //
-        ...
-        Core\Components\Commands\CreateAdminUser::class,
-        Core\Components\Commands\SocketServer::class,
-    ];
-```      
         
 ####备注：
 
