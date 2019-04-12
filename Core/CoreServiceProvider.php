@@ -30,7 +30,7 @@ class CoreServiceProvider extends ServiceProvider
         }
     }
 
-    public function routers()
+    public static function routers()
     {
         Route::namespace(Core::$base_namespace)
             ->group(function () {
