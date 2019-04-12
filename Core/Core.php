@@ -46,27 +46,27 @@ class Core
 
     public static function routers()
     {
-        Route::namespace(Core::$base_namespace)->middleware(['transaction'])->group(function () {
-            foreach (config('core.route.routes') as $routes) {
-                foreach ($routes as $route) {
-                    $closure = function () use ($route) {
-                        foreach ($route['router'] as $router) {
-                            [$method, $path, $action, $name] = $router;
-                            switch ($method) {
-                                case 'resource':
-                                    Route::$method($path, $action)->only($name);
-                                    break;
-                                default:
-                                    Route::$method($path, $action)->name($name);
-                                    break;
-                            }
-                        }
-                    };
-                    $route['middleware']
-                        ? Route::middleware($route['middleware'])->group($closure)
-                        : Route::group($closure);
-                }
-            }
-        });
+//        Route::namespace(Core::$base_namespace)->middleware(['transaction'])->group(function () {
+//            foreach (config('core.route.routes') as $routes) {
+//                foreach ($routes as $route) {
+//                    $closure = function () use ($route) {
+//                        foreach ($route['router'] as $router) {
+//                            [$method, $path, $action, $name] = $router;
+//                            switch ($method) {
+//                                case 'resource':
+//                                    Route::$method($path, $action)->only($name);
+//                                    break;
+//                                default:
+//                                    Route::$method($path, $action)->name($name);
+//                                    break;
+//                            }
+//                        }
+//                    };
+//                    $route['middleware']
+//                        ? Route::middleware($route['middleware'])->group($closure)
+//                        : Route::group($closure);
+//                }
+//            }
+//        });
     }
 }
