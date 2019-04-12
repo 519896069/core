@@ -17,10 +17,17 @@ return [
      */
     'namespace' => '',
 
+
     /*
      * |-----------------------------------
      * |
-     * | 拓展路由配置
+     * | 路由配置
+     * | [
+     * |    'middleware' => [],
+     * |    'routes'     => [
+     * |        [method, path, action, name or resource method],
+     * |    ],
+     * | ]
      * | 路由规则 [ method , path , Controller@action , name or resource method , ]
      * |-----------------------------------
      */
