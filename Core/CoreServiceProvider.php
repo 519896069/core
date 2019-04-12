@@ -35,7 +35,7 @@ class CoreServiceProvider extends ServiceProvider
 
     private function load()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../Databases/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/Databases/migrations');
         $this->mergeConfigFrom(__DIR__ . '/Components/Config/core.php', 'core');
 
         if ($this->app->runningInConsole()) {
