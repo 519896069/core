@@ -51,7 +51,7 @@ class Core
     public static function routers()
     {
         Route::middleware(['transaction'])->group(function () {
-            Route::namespace(Core::$base_namespace)->group(function () {
+            if (config('route.load')) Route::namespace(Core::$base_namespace)->group(function () {
                 self::matchRoute(config('core.route.default'));
             });
             Route::namespace(config('route.namespace'))->group(function () {

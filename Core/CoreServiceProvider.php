@@ -45,7 +45,7 @@ class CoreServiceProvider extends ServiceProvider
                 SocketServer::class,
             ]);
 
-        if (config('route.load')) Core::routers();
+        Core::routers();
 
     }
 }
