@@ -8,6 +8,7 @@ use Core\Components\Commands\SocketServer;
 use Illuminate\Support\ServiceProvider;
 use Core\Components\Workerman\Instance\Websocket as WebsocketClient;
 use Core\Components\Workerman\Interfaces\Websocket;
+use Laravel\Passport\Passport;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,8 @@ class CoreServiceProvider extends ServiceProvider
         $this->bind();
         $this->load();
         $this->publish();
+
+        Passport::tokensCan(array_merge(config('core.scopes'), config('route.scopes')));
     }
 
     private function publish()
