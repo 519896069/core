@@ -19,7 +19,7 @@ class CoreServiceProvider extends ServiceProvider
 
         app()->bind(Websocket::class, WebsocketClient::class);
         $this->loadMigrationsFrom(__DIR__ . '../Databases/migrations');
-        $this->mergeConfigFrom(__DIR__ . '../Components/Config', 'core');
+        $this->mergeConfigFrom(__DIR__ . 'Components/Config', 'core');
 
         if ($this->app->runningInConsole()) {
 
