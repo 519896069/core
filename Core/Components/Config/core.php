@@ -27,7 +27,7 @@ return [
                     [Core::POST, 'roleEmpowerment/{id}', 'PermissionAdminController@roleEmpowerment', 'role.empowerment',],
                     [Core::POST, 'userEmpowerment/{id}', 'PermissionAdminController@userEmpowerment', 'user.empowerment',],
                     [Core::POST, 'syncRoles/{id}', 'PermissionAdminController@syncRoles', 'sync.roles',],
-                    [Core::POST, 'logout', 'syncRoles/{id}', 'AuthAdminController@logout', 'logout',],
+                    [Core::POST, 'logout', 'AuthAdminController@logout', 'logout',],
                 ]
             ]
         ],

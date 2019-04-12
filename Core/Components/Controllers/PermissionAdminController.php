@@ -11,6 +11,7 @@ use Core\Components\Resources\PermissionResource;
 
 class PermissionAdminController extends AdminController
 {
+    /** @var Permission  */
     private $permission;
 
     public function __construct(Permission $permission)
@@ -33,6 +34,7 @@ class PermissionAdminController extends AdminController
     /**
      * 创建后台用户
      * @return PermissionResource
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store()
     {
