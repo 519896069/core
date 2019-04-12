@@ -62,7 +62,7 @@ class Core
             };
             $route['middleware']
                 ? Route::middleware($route['middleware'])->group($closure)
-                : Route::group($closure);
+                : Route::group([], $closure);
         }
     }
 }
