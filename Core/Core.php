@@ -66,7 +66,7 @@ class Core
             Route::group([
                 'middleware' => $route['middleware'],
             ], function () use ($route) {
-                foreach ($route['routers'] as $router) {
+                foreach ($route['routes'] as $router) {
                     [$method, $path, $action, $name] = $router;
                     switch ($method) {
                         case Core::RESOURCE:
