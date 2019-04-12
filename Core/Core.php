@@ -18,6 +18,10 @@ class Core
     const DEBUG   = "debug";
     const LOG     = "log";
 
+    const POST     = 'post';
+    const GET      = 'get';
+    const RESOURCE = 'resource';
+
     /**
      * error
      * @param string $title
@@ -46,25 +50,34 @@ class Core
 
     public static function routers()
     {
-        Route::namespace(Core::$base_namespace)->middleware(['transaction'])->group(function () {
-            foreach (config('core.route.routes') as $route) {
-                $closure = function () use ($route) {
-                    foreach ($route['router'] as $router) {
-                        [$method, $path, $action, $name] = $router;
-                        switch ($method) {
-                            case 'resource':
-                                Route::$method($path, $action)->only($name);
-                                break;
-                            default:
-                                Route::$method($path, $action)->name($name);
-                                break;
-                        }
-                    }
-                };
-                $route['middleware']
-                    ? Route::middleware($route['middleware'])->group($closure)
-                    : Route::group([], $closure);
-            }
+        Route::middleware(['transaction'])->group(function () {
+            Route::namespace(Core::$base_namespace)->group(function () {
+                self::matchRoute(config('core.route.default'));
+            });
+            Route::namespace(config('route.namespace'))->group(function () {
+                self::matchRoute(config('route'));
+            });
         });
+    }
+
+    private static function matchRoute(Array $routes)
+    {
+        foreach ($routes as $route) {
+            Route::group([
+                'middleware' => $route['middleware'],
+            ], function () use ($route) {
+                foreach ($route['router'] as $router) {
+                    [$method, $path, $action, $name] = $router;
+                    switch ($method) {
+                        case Core::RESOURCE:
+                            Route::$method($path, $action)->only($name);
+                            break;
+                        default:
+                            Route::$method($path, $action)->name($name);
+                            break;
+                    }
+                }
+            });
+        }
     }
 }

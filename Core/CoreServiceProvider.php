@@ -22,7 +22,7 @@ class CoreServiceProvider extends ServiceProvider
     private function publish()
     {
         $this->publishes([
-            __DIR__ . '/Components/Config/core.php' => config_path('core.php'),
+            __DIR__ . '/Components/Config/route.php' => config_path('route.php'),
         ]);
 
     }
@@ -37,16 +37,15 @@ class CoreServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/Databases/migrations');
         $this->mergeConfigFrom(__DIR__ . '/Components/Config/core.php', 'core');
+        $this->mergeConfigFrom(__DIR__ . '/Components/Config/route.php', 'route');
 
-        if ($this->app->runningInConsole()) {
+        if ($this->app->runningInConsole())
             $this->commands([
                 CreateAdminUser::class,
                 SocketServer::class,
             ]);
-        }
 
-        if (config('core.route', false)) {
-            Core::routers();
-        }
+        if (config('route.load')) Core::routers();
+
     }
 }

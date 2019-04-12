@@ -1,4 +1,7 @@
 <?php
+
+use Core\Core;
+
 return [
     /*
      * |-----------------------------------
@@ -8,24 +11,23 @@ return [
      * |-----------------------------------
      */
     'route' => [
-        'load'   => false,
-        'routes' => [
+        'default' => [
             [
                 'middleware' => [],
                 'router'     => [
-                    ['post', 'login', 'AuthAdminController@login', 'login'],
+                    [Core::POST, 'login', 'AuthAdminController@login', 'login'],
                 ],
             ],
             [
                 'middleware' => ['authenticate'],
                 'router'     => [
-                    ['resource', 'user', 'UserAdminController', ['index', 'store', 'update', 'show'],],
-                    ['resource', 'role', 'RoleAdminController', ['index', 'store', 'update'],],
-                    ['resource', 'permission', 'PermissionAdminController', ['index', 'store', 'update'],],
-                    ['post', 'roleEmpowerment/{id}', 'PermissionAdminController@roleEmpowerment', 'role.empowerment',],
-                    ['post', 'userEmpowerment/{id}', 'PermissionAdminController@userEmpowerment', 'user.empowerment',],
-                    ['post', 'syncRoles/{id}', 'PermissionAdminController@syncRoles', 'sync.roles',],
-                    ['logout', 'syncRoles/{id}', 'AuthAdminController@logout', 'logout',],
+                    [Core::RESOURCE, 'user', 'UserAdminController', ['index', 'store', 'update', 'show'],],
+                    [Core::RESOURCE, 'role', 'RoleAdminController', ['index', 'store', 'update'],],
+                    [Core::RESOURCE, 'permission', 'PermissionAdminController', ['index', 'store', 'update'],],
+                    [Core::POST, 'roleEmpowerment/{id}', 'PermissionAdminController@roleEmpowerment', 'role.empowerment',],
+                    [Core::POST, 'userEmpowerment/{id}', 'PermissionAdminController@userEmpowerment', 'user.empowerment',],
+                    [Core::POST, 'syncRoles/{id}', 'PermissionAdminController@syncRoles', 'sync.roles',],
+                    [Core::POST, 'logout', 'syncRoles/{id}', 'AuthAdminController@logout', 'logout',],
                 ]
             ]
         ],
