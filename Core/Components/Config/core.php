@@ -7,20 +7,26 @@ return [
      * |-----------------------------------
      * |
      * | 路由配置
+     * | [
+     * |    'middleware' => [],
+     * |    'routes'     => [
+     * |        [method, path, action, name or resource method],
+     * |    ],
+     * | ]
      * | 路由规则 [ method , path , Controller@action , name or resource method , ]
      * |-----------------------------------
      */
-    'route' => [
+    'routes' => [
         'default' => [
             [
                 'middleware' => [],
-                'router'     => [
+                'routes'     => [
                     [Core::POST, 'login', 'AuthAdminController@login', 'login'],
                 ],
             ],
             [
                 'middleware' => ['authenticate'],
-                'router'     => [
+                'routes'     => [
                     [Core::RESOURCE, 'user', 'UserAdminController', ['index', 'store', 'update', 'show'],],
                     [Core::RESOURCE, 'role', 'RoleAdminController', ['index', 'store', 'update'],],
                     [Core::RESOURCE, 'permission', 'PermissionAdminController', ['index', 'store', 'update'],],

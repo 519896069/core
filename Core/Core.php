@@ -52,7 +52,7 @@ class Core
     {
         Route::middleware(['transaction'])->group(function () {
             if (config('route.load')) Route::namespace(Core::$base_namespace)->group(function () {
-                self::matchRoute(config('core.route.default'));
+                self::matchRoute(config('core.routes.default'));
             });
             Route::namespace(config('route.namespace'))->group(function () {
                 self::matchRoute(config('route.routes'));
@@ -66,7 +66,7 @@ class Core
             Route::group([
                 'middleware' => $route['middleware'],
             ], function () use ($route) {
-                foreach ($route['router'] as $router) {
+                foreach ($route['routers'] as $router) {
                     [$method, $path, $action, $name] = $router;
                     switch ($method) {
                         case Core::RESOURCE:
