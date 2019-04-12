@@ -11,15 +11,16 @@ class Model extends BaseModel
 
     protected $casts = ['id' => 'string'];
 
-    /**
-     * 设定用户的名字。
-     *
-     * @param  string $value
-     * @return void
-     */
-    public function setIdAttribute($value)
+    public $incrementing = false;
+
+    protected $primaryKey = 'id';
+
+    protected static function boot()
     {
-        $this->attributes['id'] = self::generate_uuid();
+        parent::boot();
+        self::creating(function (Model $model) {
+            $model{$model->getKeyName()} = self::generate_uuid();
+        });
     }
 
 }
