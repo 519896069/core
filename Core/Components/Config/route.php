@@ -24,5 +24,5 @@ return [
      * | 路由规则 [ method , path , Controller@action , name or resource method , ]
      * |-----------------------------------
      */
-    'route'     => [],
+    'routes'     => [],
 ];

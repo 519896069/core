@@ -55,7 +55,7 @@ class Core
                 self::matchRoute(config('core.route.default'));
             });
             Route::namespace(config('route.namespace'))->group(function () {
-                self::matchRoute(config('route'));
+                self::matchRoute(config('route.routes'));
             });
         });
     }
