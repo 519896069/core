@@ -16,9 +16,12 @@ class CoreServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->routers();
+
         app()->bind(Websocket::class, WebsocketClient::class);
+        $this->loadMigrationsFrom(__DIR__ . '../Databases/migrations');
+        $this->mergeConfigFrom(__DIR__ . '../Components/Config', 'core');
+
         if ($this->app->runningInConsole()) {
-            $this->loadMigrationsFrom(__DIR__ . '../Databases/migrations');
 
             $this->commands([
                 CreateAdminUser::class,
