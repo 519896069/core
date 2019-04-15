@@ -54,7 +54,7 @@ class AppException extends Exception
                 'message' => $this->exception->getMessage(),
                 'line'    => $this->exception->getLine(),
                 'files'   => $this->exception->getFile(),
-                'trace'   => $this->exception->getTrace(),
+                'trace'   => $this->exception->getTraceAsString(),
             ];
         }
         return response()->json($data, $http_code, [], JSON_UNESCAPED_UNICODE);
@@ -76,7 +76,7 @@ class AppException extends Exception
                 'message' => $this->exception->getMessage(),
                 'line'    => $this->exception->getLine(),
                 'files'   => $this->exception->getFile(),
-                'trace'   => $this->exception->getTrace(),
+                'trace'   => $this->exception->getTraceAsString(),
             ], Core::ERROR);
         }
     }
