@@ -3,6 +3,7 @@
 namespace Core\Components\Controllers\Base;
 
 use Core\Components\Tools\StringTool;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
 class Model extends BaseModel
@@ -11,16 +12,15 @@ class Model extends BaseModel
 
     protected $casts = ['id' => 'string'];
 
-    public $incrementing = false;
+    public $incrementing = true;
 
     protected $primaryKey = 'id';
 
-    protected static function boot()
+    protected $keyType = 'string';
+
+    protected function insertAndSetId(Builder $query, $attributes)
     {
-        parent::boot();
-        self::creating(function (Model $model) {
-            $model{$model->getKeyName()} = self::generate_uuid();
-        });
+        $this->setAttribute($this->getKeyName(), self::generate_uuid());
     }
 
 }

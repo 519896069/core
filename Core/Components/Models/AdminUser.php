@@ -2,18 +2,21 @@
 
 namespace Core\Components\Models;
 
+use Core\Components\Controllers\Base\Model;
 use Core\Components\Filters\AdminUserFilter;
 use Core\Components\Tools\StringTool;
 use EloquentFilter\Filterable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 /**
  * @property mixed password
@@ -24,15 +27,14 @@ use Spatie\Permission\Traits\HasRoles;
  * @property mixed last_login_ip
  * @property mixed administer
  */
-class AdminUser extends User implements
+class AdminUser extends Model implements
     AuthenticatableContract,
-    AuthorizableContract
+    AuthorizableContract,
+    CanResetPasswordContract
 {
-    use Authenticatable, Authorizable;
+    use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
     use Notifiable, HasApiTokens, StringTool, Filterable;
     use HasRoles;
-
-//    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -52,9 +54,6 @@ class AdminUser extends User implements
         'password',
     ];
 
-
-    //转换id为string
-    protected $casts = ['id' => 'string'];
 
     const ADMIN  = 1;
     const NORMAL = 0;
