@@ -18,9 +18,10 @@ class Model extends BaseModel
 
     protected $keyType = 'string';
 
-    protected function insertAndSetId(Builder $query, $attributes)
+    protected function performInsert(Builder $query)
     {
         $this->setAttribute($this->getKeyName(), self::generate_uuid());
+        parent::performInsert($query);
     }
 
 }
