@@ -3,26 +3,40 @@
 namespace Core\Components\Controllers\Base;
 
 use Core\Core;
-use Illuminate\Support\Facades\DB;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class AppException extends Exception
+class AppException extends HttpException
 {
-    private   $exception    = null;
-    private   $system_error = false;
-    protected $code;
-    protected $message;
+    private $system_error = false;
 
-    public function __construct($code = 0, $message = 'system error', Exception $exception = null, $system_error = false)
+    /**
+     * AppException constructor.
+     * @param int $code
+     * @param string $message
+     * @param Exception|null $exception
+     * @param bool $system_error
+     * @param array $headers
+     */
+    public function __construct($code = 0,
+                                $message = 'system error',
+                                Exception $exception = null,
+                                $system_error = false,
+                                $headers = []
+    )
     {
-        $this->exception    = $exception;
+        parent::__construct(
+            method_exists($exception, 'getStatusCode')
+                ? $exception->getStatusCode()
+                : Response::HTTP_INTERNAL_SERVER_ERROR,
+            $message,
+            $exception,
+            $headers,
+            $code
+        );
         $this->system_error = $system_error;
-
-        $this->code    = $code;
-        $this->message = $message;
     }
 
     public static function make(Exception $exception)
@@ -33,31 +47,23 @@ class AppException extends Exception
     /**
      * @param $request
      * @return \Illuminate\Http\JsonResponse
-     * @throws Exception
      */
     public function render($request)
     {
         DB::rollBack();
-        $http_code = Response::HTTP_INTERNAL_SERVER_ERROR;
-        if ($this->exception instanceof HttpException)
-            $http_code = $this->exception->getStatusCode();
-        if ($this->exception instanceof NotFoundHttpException)
-            $http_code = Response::HTTP_NOT_FOUND;
-        if ($this->exception instanceof AppException)
-            $http_code = Response::HTTP_BAD_REQUEST;
         $data = [
-            'error_code' => $this->exception->getCode(),
-            'error_msg'  => $this->exception->getMessage(),
+            'error_code' => $this->getCode(),
+            'error_msg'  => $this->getMessage(),
         ];
         if (config('app.debug')) {
             $errorData['meta']['debug'] = [
-                'message' => $this->exception->getMessage(),
-                'line'    => $this->exception->getLine(),
-                'files'   => $this->exception->getFile(),
-                'trace'   => $this->exception->getTraceAsString(),
+                'message' => $this->getMessage(),
+                'line'    => $this->getPrevious()->getLine(),
+                'files'   => $this->getPrevious()->getFile(),
+                'trace'   => $this->getPrevious()->getTraceAsString(),
             ];
         }
-        return response()->json($data, $http_code, [], JSON_UNESCAPED_UNICODE);
+        return response()->json($data, $this->getStatusCode(), [], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -71,12 +77,12 @@ class AppException extends Exception
         } else {
             $title = "Command ";
         }
-        if (!($this->exception instanceof AppException)) {
+        if (!($this->getPrevious() instanceof AppException)) {
             Core::printLog("$title ERROR:", [
-                'message' => $this->exception->getMessage(),
-                'line'    => $this->exception->getLine(),
-                'files'   => $this->exception->getFile(),
-                'trace'   => $this->exception->getTraceAsString(),
+                'message' => $this->getMessage(),
+                'line'    => $this->getPrevious()->getLine(),
+                'files'   => $this->getPrevious()->getFile(),
+                'trace'   => $this->getPrevious()->getTraceAsString(),
             ], Core::ERROR);
         }
     }
