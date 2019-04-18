@@ -33,6 +33,28 @@ transaction : 事务中间件
         class Handler extends Core\Components\Base\Handler {
         ...
         
+###5.修改config/auth.php
+ 修改为passport配置
+ 
+        ...
+        'guards' => [
+                'admin-api' => [
+                    'driver' => 'passport',
+                    'provider' => 'admin-api',
+                ],
+                ...
+        ],
+        
+        'providers' => [
+                'admin-api' => [
+                    'driver' => 'eloquent',
+                    'model' => \Core\Components\Models\AdminUser::class,
+                ],
+                ...
+        ],
+        ...
+        
+        
         
 ####备注：
 
