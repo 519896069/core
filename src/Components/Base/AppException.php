@@ -51,7 +51,7 @@ class AppException extends HttpException
     public function render($request)
     {
         DB::rollBack();
-        $data = [
+        $errorData = [
             'error_code' => $this->getCode(),
             'error_msg'  => $this->getMessage(),
         ];
@@ -63,7 +63,7 @@ class AppException extends HttpException
                 'trace'   => $this->getPrevious()->getTraceAsString(),
             ];
         }
-        return response()->json($data, $this->getStatusCode(), [], JSON_UNESCAPED_UNICODE);
+        return response()->json($errorData, $this->getStatusCode(), [], JSON_UNESCAPED_UNICODE);
     }
 
     /**
