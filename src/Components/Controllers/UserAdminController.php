@@ -4,6 +4,7 @@ namespace Core\Components\Controllers;
 
 
 use Core\Components\Controllers\Base\AdminController;
+use Core\Components\Controllers\Base\AppException;
 use Core\Components\Models\AdminUser;
 use Core\Components\Resources\AdminUserResource;
 use Illuminate\Support\Facades\Hash;
@@ -62,7 +63,8 @@ class UserAdminController extends AdminController
 
     public function show($id)
     {
-        $user = $this->adminUser->query()->findOrFail($id);
+        $user = $this->adminUser->query()->find($id);
+        if (!$user) throw new AppException(-1, '用户不存在');
         return AdminUserResource::make($user);
     }
 }
