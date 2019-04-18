@@ -18,6 +18,10 @@ class CoreServiceProvider extends ServiceProvider
         $this->load();
 
         $this->publish();
+    }
+
+    public function boot()
+    {
         Passport::tokensCan(array_merge(config('core.scopes'), config('route.scopes')));
     }
 
