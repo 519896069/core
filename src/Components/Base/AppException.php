@@ -52,8 +52,8 @@ class AppException extends HttpException
     {
         DB::rollBack();
         $data = [
-            'error_code' => $this->getPrevious()->getCode(),
-            'error_msg'  => $this->getPrevious()->getMessage(),
+            'error_code' => $this->getCode(),
+            'error_msg'  => $this->getMessage(),
         ];
         if (config('app.debug')) {
             $errorData['meta']['debug'] = [
@@ -79,7 +79,7 @@ class AppException extends HttpException
         }
         if (!($this->getPrevious() instanceof AppException)) {
             Core::printLog("$title ERROR:", [
-                'message' => $this->getPrevious()->getMessage(),
+                'message' => $this->getMessage(),
                 'line'    => $this->getPrevious()->getLine(),
                 'files'   => $this->getPrevious()->getFile(),
                 'trace'   => $this->getPrevious()->getTraceAsString(),
