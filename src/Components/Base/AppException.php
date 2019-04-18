@@ -60,7 +60,7 @@ class AppException extends HttpException
                 'message' => $this->getPrevious()->getMessage(),
                 'line'    => $this->getPrevious()->getLine(),
                 'files'   => $this->getPrevious()->getFile(),
-                'trace'   => $this->getPrevious()->getTraceAsString(),
+                'trace'   => $this->formatTrace($this->getPrevious()->getTraceAsString()),
             ];
         }
         return response()->json($errorData, $this->getStatusCode(), [], JSON_UNESCAPED_UNICODE);
@@ -82,8 +82,14 @@ class AppException extends HttpException
                 'message' => $this->getMessage(),
                 'line'    => $this->getPrevious()->getLine(),
                 'files'   => $this->getPrevious()->getFile(),
-                'trace'   => $this->getPrevious()->getTraceAsString(),
+                'trace'   => $this->formatTrace($this->getPrevious()->getTraceAsString()),
             ], Core::ERROR);
         }
+    }
+
+
+    public function formatTrace($trace)
+    {
+        return explode("\n", $trace);
     }
 }
