@@ -12,13 +12,12 @@ use Laravel\Passport\Passport;
 
 class CoreServiceProvider extends ServiceProvider
 {
-
-    public function boot()
+    public function register()
     {
         $this->bind();
         $this->load();
-        $this->publish();
 
+        $this->publish();
         Passport::tokensCan(array_merge(config('core.scopes'), config('route.scopes')));
     }
 
