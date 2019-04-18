@@ -33,10 +33,11 @@ return [
      * | [
      * |    'middleware' => [],
      * |    'routes'     => [
-     * |        [method, path, action, name or resource method],
+     * |        Router,
      * |    ],
      * | ]
-     * | 路由规则 [ method , path , Controller@action , name or resource method , ]
+     * | 路由规则Router: [ method , path , Controller@action , name or resource method , ]
+     * | 事例见： Config/core.php
      * |-----------------------------------
      */
     'routes'    => [],
