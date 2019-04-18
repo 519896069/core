@@ -62,7 +62,7 @@ class UserAdminController extends AdminController
 
     public function show($id)
     {
-        $user = $this->adminUser->find($id);
+        $user = $this->adminUser->query()->findOrFail($id);
         return AdminUserResource::make($user);
     }
 }
