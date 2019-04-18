@@ -41,7 +41,7 @@ class AppException extends HttpException
 
     public static function make(Exception $exception)
     {
-        return new static(null, null, $exception);
+        return new static($exception->getCode(), $exception->getMessage(), $exception);
     }
 
     /**
@@ -52,12 +52,12 @@ class AppException extends HttpException
     {
         DB::rollBack();
         $data = [
-            'error_code' => $this->getCode(),
-            'error_msg'  => $this->getMessage(),
+            'error_code' => $this->getPrevious()->getCode(),
+            'error_msg'  => $this->getPrevious()->getMessage(),
         ];
         if (config('app.debug')) {
             $errorData['meta']['debug'] = [
-                'message' => $this->getMessage(),
+                'message' => $this->getPrevious()->getMessage(),
                 'line'    => $this->getPrevious()->getLine(),
                 'files'   => $this->getPrevious()->getFile(),
                 'trace'   => $this->getPrevious()->getTraceAsString(),
@@ -79,7 +79,7 @@ class AppException extends HttpException
         }
         if (!($this->getPrevious() instanceof AppException)) {
             Core::printLog("$title ERROR:", [
-                'message' => $this->getMessage(),
+                'message' => $this->getPrevious()->getMessage(),
                 'line'    => $this->getPrevious()->getLine(),
                 'files'   => $this->getPrevious()->getFile(),
                 'trace'   => $this->getPrevious()->getTraceAsString(),
