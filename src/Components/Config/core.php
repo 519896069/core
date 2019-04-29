@@ -34,6 +34,7 @@ return [
                     [Core::POST, 'userEmpowerment/{id}', 'PermissionAdminController@userEmpowerment', 'user.empowerment',],
                     [Core::POST, 'syncRoles/{id}', 'PermissionAdminController@syncRoles', 'sync.roles',],
                     [Core::POST, 'logout', 'AuthAdminController@logout', 'logout',],
+                    [Core::GET, 'info', 'UserAdminController@info', 'user.info',],
                 ]
             ]
         ],

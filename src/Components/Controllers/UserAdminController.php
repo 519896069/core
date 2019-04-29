@@ -67,4 +67,12 @@ class UserAdminController extends AdminController
         if (!$user) throw new AppException(-1, '用户不存在');
         return AdminUserResource::make($user);
     }
+
+    public function info()
+    {
+        if (!$user = auth()->user()) throw new AppException(-1, '用户不存在');
+        return AdminUserResource::make($user);
+    }
+
+
 }
