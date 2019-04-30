@@ -3,6 +3,7 @@
 namespace Core\Components\Resources;
 
 
+use Core\Components\Models\Role;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AdminUserResource extends JsonResource
@@ -11,7 +12,7 @@ class AdminUserResource extends JsonResource
     {
         $data                = parent::toArray($request);
         $data['permissions'] = array_column($this->getAllPermissions()->toArray(), 'name');
-        $data['roles']       = array_column($this->getAllRoles()->toArray(), 'id');
+        $data['roles']       = Role::query()->whereIn('name', $this->getRoleNames()->toArray())->value('id');
         return $data;
     }
 }
