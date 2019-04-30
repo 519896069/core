@@ -4,6 +4,7 @@ namespace Core\Components\Controllers;
 
 
 use Core\Components\Controllers\Base\AdminController;
+use Core\Components\Models\Permission;
 use Core\Components\Models\Role;
 use Core\Components\Resources\RoleResource;
 
@@ -39,7 +40,10 @@ class RoleAdminController extends AdminController
             'name'       => 'required',
             'guard_name' => 'required',
         ]);
-        return RoleResource::make($this->role->create(request(['guard_name', 'name'])));
+        $role = $this->role->create(request(['guard_name', 'name']));
+        if ($permissions = request('permissions'))
+            $role->syncPermissions(Permission::whereIn('name', $permissions)->get());
+        return RoleResource::make($role);
     }
 
     /**
@@ -53,6 +57,8 @@ class RoleAdminController extends AdminController
         if (request()->filled('name'))
             $role->name = request('name');
         $role->save();
+        if ($permissions = request('permissions'))
+            $role->syncPermissions(Permission::whereIn('name', $permissions)->get());
         return RoleResource::make($role);
     }
 
