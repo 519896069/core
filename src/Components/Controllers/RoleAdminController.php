@@ -55,4 +55,15 @@ class RoleAdminController extends AdminController
         $role->save();
         return RoleResource::make($role);
     }
+
+    /**
+     * 更新用户信息
+     * @param $id
+     * @return RoleResource
+     */
+    public function show($id)
+    {
+        $role = $this->role->query()->find($id);
+        return RoleResource::make($role);
+    }
 }

@@ -11,6 +11,7 @@ class AdminUserResource extends JsonResource
     {
         $data                = parent::toArray($request);
         $data['permissions'] = array_column($this->getAllPermissions()->toArray(), 'name');
+        $data['roles']       = array_column($this->getAllRoles()->toArray(), 'id');
         return $data;
     }
 }
