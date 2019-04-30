@@ -37,7 +37,9 @@ class UserAdminController extends AdminController
             'password' => 'required|min:5',
             'username' => 'required',
         ]);
-        return AdminUserResource::make($this->adminUser->createData(request(['account', 'password', 'username'])));
+        $user = $this->adminUser->createData(request(['account', 'password', 'username']));
+        if ($roles = request('roles')) $user->syncRoles($roles);
+        return AdminUserResource::make($user);
     }
 
     /**
@@ -58,7 +60,7 @@ class UserAdminController extends AdminController
         if (request()->filled('password'))
             $user->password = Hash::make(request('password'));
         $user->save();
-        if($roles = request('roles')) $user->syncRoles($roles);
+        if ($roles = request('roles')) $user->syncRoles($roles);
         return AdminUserResource::make($user);
     }
 
