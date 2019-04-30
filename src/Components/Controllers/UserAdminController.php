@@ -58,6 +58,7 @@ class UserAdminController extends AdminController
         if (request()->filled('password'))
             $user->password = Hash::make(request('password'));
         $user->save();
+        if($roles = request('roles')) $user->syncRoles($roles);
         return AdminUserResource::make($user);
     }
 
