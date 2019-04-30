@@ -28,7 +28,7 @@ return [
                 'middleware' => ['authenticate'],
                 'routes'     => [
                     [Core::RESOURCE, 'user', 'UserAdminController', ['index', 'store', 'update', 'show'],],
-                    [Core::RESOURCE, 'role', 'RoleAdminController', ['index', 'store', 'update'],],
+                    [Core::RESOURCE, 'role', 'RoleAdminController', ['index', 'store', 'update', 'show'],],
                     [Core::RESOURCE, 'permission', 'PermissionAdminController', ['index', 'store', 'update'],],
                     [Core::POST, 'roleEmpowerment/{id}', 'PermissionAdminController@roleEmpowerment', 'role.empowerment',],
                     [Core::POST, 'userEmpowerment/{id}', 'PermissionAdminController@userEmpowerment', 'user.empowerment',],
