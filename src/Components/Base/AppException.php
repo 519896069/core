@@ -41,7 +41,7 @@ class AppException extends HttpException
 
     public static function make(Exception $exception)
     {
-        return new static($exception->getCode(), $exception->getMessage(), $exception);
+        return new static($exception->getCode(), $exception->getMessage(), $exception, !($exception instanceof AppException));
     }
 
     /**
