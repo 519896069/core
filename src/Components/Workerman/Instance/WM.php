@@ -47,6 +47,7 @@ class WM
                 }
             };
             $websocket->onConnect($connection);
+            DB::commit();
         };
         $this->worker->onMessage     = function ($connection, $data) use ($websocket) {
             $websocket->onMessage($connection, $data);
@@ -54,6 +55,7 @@ class WM
         $this->worker->onClose       = function ($connection) use ($websocket) {
             $this->closeConnect($connection);
             $websocket->onClose($connection);
+            DB::commit();
         };
     }
 
@@ -84,7 +86,6 @@ class WM
         if ($connectionModel) {
             $connectionModel->status = Connection::OFF;
             $connectionModel->save();
-            DB::commit();
         }
     }
 
