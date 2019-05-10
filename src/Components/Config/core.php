@@ -49,4 +49,9 @@ return [
     'scopes' => [
         'admin-api' => 'admin-api',
     ],
+
+    'websocket' => [
+        'host' => env('WEBSOCKET_HOST', ''),
+        'port' => env('WEBSOCKET_PORT', 0),
+    ]
 ];

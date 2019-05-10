@@ -26,7 +26,7 @@ class SocketServer extends Command
     {
         global $argv;
         $argv[1] = $this->input->getArgument('action');
-        $wm      = WM::getInstance(config('socket.host'), config('socket.port'));
+        $wm      = WM::getInstance(config('core.websocket.host'), config('core.websocket.port'));
         $wm->start();
     }
 }
