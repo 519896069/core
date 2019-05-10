@@ -16,8 +16,4 @@ class Connection extends Model
 
     protected $casts = ['id' => 'string'];
 
-    public static function init()
-    {
-        (new Connection)->update(['status' => self::OFF]);
-    }
 }
