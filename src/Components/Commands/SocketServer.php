@@ -29,9 +29,7 @@ class SocketServer extends Command
         if (!$action = $this->input->getArgument('action'))
             $action = $this->ask('请输入需要的动作,start|restart');
         $argv[1] = $action;
-        DB::transaction(function () {
-            $wm = WM::getInstance(config('core.websocket.host'), config('core.websocket.port'));
-            $wm->start();
-        });
+        $wm      = WM::getInstance(config('core.websocket.host'), config('core.websocket.port'));
+        $wm->start();
     }
 }

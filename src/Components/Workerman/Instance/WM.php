@@ -5,6 +5,7 @@ namespace Core\Components\Workerman\Instance;
 
 use Core\Components\Models\Connection;
 use Core\Core;
+use Illuminate\Support\Facades\DB;
 use Workerman\Lib\Timer;
 use Workerman\Worker;
 use Core\Components\Workerman\Interfaces\Websocket;
@@ -27,24 +28,30 @@ class WM
         $this->worker->onWorkerStart = function ($worker) use ($websocket) {
             $this->heartbeat($worker);
             $websocket->onWorkStart($worker);
+            DB::commit();
+            DB::beginTransaction();
         };
         $this->worker->onConnect     = function ($connection) use ($websocket) {
             $connection->onWebSocketConnect = function ($connection) {
-                if (isset($_GET['token'])) {
-                    //修改链接状态
-                    Connection::query()->updateOrCreate([
-                        'user_id' => Core::getUidFormToken($_GET['token']),
-                    ], [
-                        'connect_id' => $connection->id,
-                        'worker_id'  => $connection->worker->id,
-                        'user_id'    => Core::getUidFormToken($_GET['token']),
-                        'status'     => Connection::ON,
-                    ]);
-                } else {
-                    $connection->close();
-                }
+                DB::transaction(function () use ($connection) {
+                    if (isset($_GET['token'])) {
+                        //修改链接状态
+                        Connection::query()->updateOrCreate([
+                            'user_id' => Core::getUidFormToken($_GET['token']),
+                        ], [
+                            'connect_id' => $connection->id,
+                            'worker_id'  => $connection->worker->id,
+                            'user_id'    => Core::getUidFormToken($_GET['token']),
+                            'status'     => Connection::ON,
+                        ]);
+                    } else {
+                        $connection->close();
+                    }
+                });
             };
             $websocket->onConnect($connection);
+            DB::commit();
+            DB::beginTransaction();
         };
         $this->worker->onMessage     = function ($connection, $data) use ($websocket) {
             $websocket->onMessage($connection, $data);
@@ -52,6 +59,8 @@ class WM
         $this->worker->onClose       = function ($connection) use ($websocket) {
             $this->closeConnect($connection);
             $websocket->onClose($connection);
+            DB::commit();
+            DB::beginTransaction();
         };
     }
 
