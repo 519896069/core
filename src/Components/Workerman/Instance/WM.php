@@ -28,8 +28,6 @@ class WM
         $this->worker->onWorkerStart = function ($worker) use ($websocket) {
             $this->heartbeat($worker);
             $websocket->onWorkStart($worker);
-            DB::commit();
-            DB::beginTransaction();
         };
         $this->worker->onConnect     = function ($connection) use ($websocket) {
             $connection->onWebSocketConnect = function ($connection) {
@@ -50,8 +48,6 @@ class WM
                 });
             };
             $websocket->onConnect($connection);
-            DB::commit();
-            DB::beginTransaction();
         };
         $this->worker->onMessage     = function ($connection, $data) use ($websocket) {
             $websocket->onMessage($connection, $data);
@@ -59,8 +55,6 @@ class WM
         $this->worker->onClose       = function ($connection) use ($websocket) {
             $this->closeConnect($connection);
             $websocket->onClose($connection);
-            DB::commit();
-            DB::beginTransaction();
         };
     }
 
@@ -109,6 +103,7 @@ class WM
                 if ($time_now - $connection->lastMessageTime > self::HEARTBEAT_TIME) {
                     $connection->close();
                 }
+                $connection->lastMessageTime = $time_now;
             }
         });
     }
