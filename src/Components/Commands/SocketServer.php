@@ -5,6 +5,7 @@ namespace Core\Components\Commands;
 
 use Core\Components\Base\Command;
 use Core\Components\Workerman\Instance\WM;
+use Illuminate\Support\Facades\DB;
 
 class SocketServer extends Command
 {
@@ -28,7 +29,9 @@ class SocketServer extends Command
         if (!$action = $this->input->getArgument('action'))
             $action = $this->ask('请输入需要的动作,start|restart');
         $argv[1] = $action;
-        $wm      = WM::getInstance(config('core.websocket.host'), config('core.websocket.port'));
-        $wm->start();
+        DB::transaction(function () {
+            $wm = WM::getInstance(config('core.websocket.host'), config('core.websocket.port'));
+            $wm->start();
+        });
     }
 }

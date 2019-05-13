@@ -5,7 +5,6 @@ namespace Core\Components\Workerman\Instance;
 
 use Core\Components\Models\Connection;
 use Core\Core;
-use Illuminate\Support\Facades\DB;
 use Workerman\Lib\Timer;
 use Workerman\Worker;
 use Core\Components\Workerman\Interfaces\Websocket;
@@ -41,13 +40,11 @@ class WM
                         'user_id'    => Core::getUidFormToken($_GET['token']),
                         'status'     => Connection::ON,
                     ]);
-                    DB::commit();
                 } else {
                     $connection->close();
                 }
             };
             $websocket->onConnect($connection);
-            DB::commit();
         };
         $this->worker->onMessage     = function ($connection, $data) use ($websocket) {
             $websocket->onMessage($connection, $data);
@@ -55,7 +52,6 @@ class WM
         $this->worker->onClose       = function ($connection) use ($websocket) {
             $this->closeConnect($connection);
             $websocket->onClose($connection);
-            DB::commit();
         };
     }
 
