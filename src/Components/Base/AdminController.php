@@ -6,10 +6,10 @@ class AdminController extends BaseController
 {
     protected $guard = 'admin-api';
 
-    private $model_class;
+    protected $model_class;
     /** @type Model */
-    private $model;
-    private $resource_class;
+    protected $model;
+    protected $resource_class;
 
     public function __construct()
     {
