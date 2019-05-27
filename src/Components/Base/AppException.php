@@ -17,7 +17,7 @@ class AppException extends HttpException
      * @param int $code
      * @param string $message
      * @param Exception|null $exception
-     * @param bool $system_error
+     * @param bool $app_error
      * @param array $headers
      */
     public function __construct($code = 0,
@@ -27,6 +27,7 @@ class AppException extends HttpException
                                 $headers = []
     )
     {
+        $code = is_numeric($code) ? $code : -1;
         parent::__construct(
             method_exists($exception, 'getStatusCode')
                 ? $exception->getStatusCode()
