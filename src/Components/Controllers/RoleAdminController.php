@@ -41,8 +41,8 @@ class RoleAdminController extends AdminController
             'guard_name' => 'required',
         ]);
         $role = $this->role->create(request(['guard_name', 'name']));
-        if ($permissions = request('permissions'))
-            $role->syncPermissions(Permission::whereIn('name', $permissions)->get());
+        if ($permissions = request('tree'))
+            $role->syncPermissions(Permission::getPermissionsFromName($permissions));
         return RoleResource::make($role);
     }
 
@@ -57,8 +57,8 @@ class RoleAdminController extends AdminController
         if (request()->filled('name'))
             $role->name = request('name');
         $role->save();
-        if ($permissions = request('permissions'))
-            $role->syncPermissions(Permission::whereIn('name', $permissions)->get());
+        if ($permissions = request('tree'))
+            $role->syncPermissions(Permission::getPermissionsFromName($permissions));
         return RoleResource::make($role);
     }
 

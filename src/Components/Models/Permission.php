@@ -16,4 +16,17 @@ class Permission extends PermissionsPermission
     {
         return PermissionFilter::class;
     }
+
+    public static function getPermissionsFromName($names)
+    {
+        $permissions = [];
+        if (is_array($names)) {
+            foreach ($names as $name) {
+                $permissions[] = Permission::firstOrCreate(['name' => $name,], ['name' => $name]);
+            }
+        } else {
+            $permissions[] = Permission::firstOrCreate(['name' => $names,], ['name' => $names]);
+        }
+        return $permissions;
+    }
 }
