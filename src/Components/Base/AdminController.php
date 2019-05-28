@@ -34,11 +34,11 @@ class AdminController extends BaseController
 
     public function update($id)
     {
-        $data = request($this->model->getFillable());
-        $data = $this->updateData($data);
-        return ($this->resource_class)::make(
-            $this->model->newQuery()->whereId($id)->update($data)
-        );
+        $data  = request($this->model->getFillable());
+        $data  = $this->updateData($data);
+        $query = $this->model->newQuery()->whereId($id)->firstOrFail();
+        $query->update($data);
+        return ($this->resource_class)::make($query);
     }
 
     public function show($id)
