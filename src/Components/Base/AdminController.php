@@ -35,8 +35,8 @@ class AdminController extends BaseController
     public function update($id)
     {
         $data  = request($this->model->getFillable());
-        $data  = $this->updateData($data);
         $query = $this->model->newQuery()->whereId($id)->firstOrFail();
+        $data  = $this->updateData($data, $query);
         $query->update($data);
         return ($this->resource_class)::make($query);
     }
@@ -59,7 +59,7 @@ class AdminController extends BaseController
         return $data;
     }
 
-    protected function updateData($data)
+    protected function updateData($data, Model $query)
     {
         return $data;
     }
