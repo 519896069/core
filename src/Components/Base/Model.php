@@ -12,7 +12,7 @@ class Model extends BaseModel
 
     protected $casts = ['id' => 'string'];
 
-    public $incrementing = true;
+    public $incrementing = false;
 
     protected $primaryKey = 'id';
 
