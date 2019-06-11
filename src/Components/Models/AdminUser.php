@@ -91,6 +91,6 @@ class AdminUser extends Model implements
     public function cant($route)
     {
         $whiteList = config('core.admin_permission_white_list') + config('route.admin_permission_white_list');
-        return in_array($route, $whiteList) || Authorizable::cant($route);
+        return !in_array($route, $whiteList) && Authorizable::cant($route);
     }
 }
