@@ -48,7 +48,7 @@ class AdminController extends BaseController
         );
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $model = $this->model->newQuery()->findOrFail($id);
         $model->delete();
