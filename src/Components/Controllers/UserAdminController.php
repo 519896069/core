@@ -21,7 +21,7 @@ class UserAdminController extends AdminController
 
     public function index()
     {
-        $list = $this->adminUser->filter(request()->input())->paginateFilter();
+        $list = $this->adminUser->filter(request()->input())->orderBy('created_at')->paginateFilter();
         return AdminUserResource::collection($list);
     }
 
