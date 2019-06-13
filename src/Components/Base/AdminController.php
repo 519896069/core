@@ -2,9 +2,9 @@
 
 namespace Core\Components\Controllers\Base;
 
-use HttpException;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AdminController extends BaseController
 {
