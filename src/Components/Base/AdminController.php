@@ -2,6 +2,10 @@
 
 namespace Core\Components\Controllers\Base;
 
+use HttpException;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
+
 class AdminController extends BaseController
 {
     protected $guard = 'admin-api';
@@ -10,6 +14,16 @@ class AdminController extends BaseController
     /** @type Model */
     protected $model;
     protected $resource_class;
+
+    protected $validator = [
+        'validate' => [],
+        'message'  => [],
+    ];
+
+    const ERROR_MESSAGE = [
+        'required' => ':attribute 必须填写',
+        'max'      => ':attribute 超过了指定长度 :max',
+    ];
 
     public function __construct()
     {
@@ -62,5 +76,27 @@ class AdminController extends BaseController
     protected function updateData($data, Model $query)
     {
         return $data;
+    }
+
+
+    /**
+     * @param $message
+     * @throws HttpException
+     */
+    public function throwAppException($message)
+    {
+        throw new HttpException(Response::HTTP_BAD_REQUEST, $message);
+    }
+
+    /**
+     * @param $data
+     * @throws HttpException
+     */
+    public function valid($data)
+    {
+        $validator = Validator::make($data, $this->validator['validate'], self::ERROR_MESSAGE, $this->validator['message']);
+        if ($validator->errors()->isNotEmpty()) {
+            $this->throwAppException(implode(',', array_values($validator->errors()->all())));
+        }
     }
 }
