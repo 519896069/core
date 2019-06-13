@@ -19,7 +19,7 @@ class AdminController extends BaseController
 
     public function index()
     {
-        $list = $this->model->filter(request()->input())->paginateFilter();
+        $list = $this->model->filter(request()->input())->orderBy('created_at')->paginateFilter();
         return ($this->resource_class)::collection($list);
     }
 
